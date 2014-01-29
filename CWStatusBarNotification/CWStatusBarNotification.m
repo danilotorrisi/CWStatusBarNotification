@@ -144,11 +144,17 @@
 {
     self.notificationWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.notificationWindow.backgroundColor = [UIColor clearColor];
-    self.notificationWindow.userInteractionEnabled = NO;
+    self.notificationWindow.userInteractionEnabled = YES;
     self.notificationWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.notificationWindow.windowLevel = UIWindowLevelStatusBar;
     self.notificationWindow.rootViewController = [UIViewController new];
     self.notificationWindow.rootViewController.view.bounds = [self getNotificationLabelFrame];
+    self.notificationWindow.rootViewController.view.userInteractionEnabled = NO;
+
+    // Add the tap gesture recognizer to the window.
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+    [self.statusBarView addGestureRecognizer:tapGestureRecognizer];
+
 }
 
 - (void)createStatusBarView
@@ -164,9 +170,6 @@
     [self.notificationWindow.rootViewController.view addSubview:self.statusBarView];
     [self.notificationWindow.rootViewController.view sendSubviewToBack:self.statusBarView];
 
-    // Add the tap gesture recognizer to the status bar view.
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-    [self.statusBarView addGestureRecognizer:tapGestureRecognizer];
 }
 
 # pragma mark - frame changing

@@ -12,11 +12,10 @@
 - (CGFloat)scrollTime;
 @end
 
-@interface CWStatusBarNotification : NSObject
-
-
 static NSString *const CWStatusBarNotificationTapEvent = @"CWStatusBarNotificationTapEvent";
 
+
+@interface CWStatusBarNotification : NSObject
 
 typedef NS_ENUM(NSInteger, CWNotificationStyle) {
     CWNotificationStyleStatusBarNotification,

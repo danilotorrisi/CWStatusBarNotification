@@ -14,6 +14,10 @@
 
 @interface CWStatusBarNotification : NSObject
 
+
+static NSString *const CWStatusBarNotificationTapEvent = @"CWStatusBarNotificationTapEvent";
+
+
 typedef NS_ENUM(NSInteger, CWNotificationStyle) {
     CWNotificationStyleStatusBarNotification,
     CWNotificationStyleNavigationBarNotification

@@ -39,6 +39,12 @@
     return self;
 }
 
+- (void)tap:(UITapGestureRecognizer*)sender {
+
+    // If ended, post a notification.
+    if ([sender state] == UIGestureRecognizerStateEnded) [[NSNotificationCenter defaultCenter] postNotificationName:CWStatusBarNotificationTapEvent object:self];
+}
+
 # pragma mark - dimensions
 
 - (CGFloat)getStatusBarHeight {
@@ -147,6 +153,8 @@
 
 - (void)createStatusBarView
 {
+
+
     self.statusBarView = [[UIView alloc] initWithFrame:[self getNotificationLabelFrame]];
     self.statusBarView.clipsToBounds = YES;
     if (self.notificationAnimationType == CWNotificationAnimationTypeReplace) {
@@ -155,6 +163,10 @@
     }
     [self.notificationWindow.rootViewController.view addSubview:self.statusBarView];
     [self.notificationWindow.rootViewController.view sendSubviewToBack:self.statusBarView];
+
+    // Add the tap gesture recognizer to the status bar view.
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+    [self.statusBarView addGestureRecognizer:tapGestureRecognizer];
 }
 
 # pragma mark - frame changing

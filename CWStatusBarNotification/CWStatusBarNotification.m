@@ -18,7 +18,7 @@
 
 @implementation CWStatusBarNotification
 
-@synthesize notificationLabel, notificationLabelBackgroundColor, notificationLabelTextColor, notificationWindow;
+@synthesize notificationLabel, notificationLabelBackgroundColor, notificationLabelTextColor, notificationWindow, notificationLabelFont;
 
 @synthesize statusBarView;
 
@@ -34,6 +34,7 @@
         self.notificationAnimationInStyle = CWNotificationAnimationStyleBottom;
         self.notificationAnimationOutStyle = CWNotificationAnimationStyleBottom;
         self.notificationAnimationType = CWNotificationAnimationTypeReplace;
+        self.notificationLabelFont = [UIFont systemFontOfSize: FONT_SIZE];
     }
     return self;
 }
@@ -113,7 +114,7 @@
     self.notificationLabel.text = message;
     self.notificationLabel.textAlignment = NSTextAlignmentCenter;
     self.notificationLabel.adjustsFontSizeToFitWidth = NO;
-    self.notificationLabel.font = [UIFont systemFontOfSize:FONT_SIZE];
+    self.notificationLabel.font = self.notificationLabelFont;
     self.notificationLabel.backgroundColor = self.notificationLabelBackgroundColor;
     self.notificationLabel.textColor = self.notificationLabelTextColor;
     switch (self.notificationAnimationInStyle) {
